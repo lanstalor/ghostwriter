@@ -3,7 +3,7 @@
 from typing import List
 
 try:
-    from ebooklib import epub
+    from ebooklib import epub, ITEM_DOCUMENT
 except ImportError as e:  # pragma: no cover - library might not be installed
     epub = None
 
@@ -16,6 +16,6 @@ def read_epub(file_path: str) -> List[str]:
     book = epub.read_epub(file_path)
     chapters = []
     for item in book.get_items():
-        if item.get_type() == epub.ITEM_DOCUMENT:
+        if item.get_type() == ITEM_DOCUMENT:
             chapters.append(item.get_content().decode("utf-8"))
     return chapters

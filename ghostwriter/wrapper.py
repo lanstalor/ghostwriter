@@ -1,3 +1,5 @@
+"""Interactive wrapper for ghostwriter."""
+=======
 """Interactive wrapper for Ghostwriter."""
 
 from __future__ import annotations
@@ -5,8 +7,9 @@ from __future__ import annotations
 from pathlib import Path
 
 from .parser import read_epub
+from .vector_store import VectorStore
+from .llm import generate_next_book, DEFAULT_MODELS
 from .cli import _load_dependencies
-from .llm import DEFAULT_MODELS
 
 
 def _gather_epubs(path: Path) -> list[Path]:
@@ -16,6 +19,7 @@ def _gather_epubs(path: Path) -> list[Path]:
 
 
 def main() -> None:
+
     """Run interactive prompts to generate a new book."""
     print("Ghostwriter interactive wrapper")
 
@@ -49,6 +53,7 @@ def main() -> None:
         provider=provider,
         model=model,
     )
+
 
     Path(out_file).write_text(generated, encoding="utf-8")
     print(f"Book saved as {out_file}")
